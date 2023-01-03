@@ -1,0 +1,23 @@
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA rst_app FROM waiter;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA rst_app FROM waiter;
+drop role waiter;
+
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA rst_app FROM guest;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA rst_app FROM guest;
+drop role guest;
+
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA rst_app FROM admin;
+REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA rst_app FROM admin;
+drop role admin;
+
+drop table rst_app.restaurante ;
+
+drop table rst_app.staff ;
+
+drop table rst_app.reservations;
+
+drop table rst_app.Tables ;
+
+drop table rst_app.WaiterToTables;
+
+drop table rst_app.WaiterTips ;

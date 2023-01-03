@@ -1,0 +1,15 @@
+CREATE ROLE waiter WITH LOGIN PASSWORD 'waiter';
+grant pg_read_all_data to waiter;
+grant insert on rst_app. waitertips to waiter;
+GRANT USAGE, SELECT ON all sequences in schema rst_app  TO waiter;
+
+CREATE ROLE guest WITH LOGIN PASSWORD 'guest' ;
+grant pg_read_all_data to guest;
+grant insert, update on rst_app.reservations to guest;
+GRANT USAGE, SELECT ON all sequences in schema rst_app  TO guest;
+
+
+CREATE ROLE admin WITH LOGIN PASSWORD 'admin' ;
+grant pg_read_all_data to admin;
+GRANT USAGE, SELECT ON all sequences in schema rst_app  TO admin;
+grant insert, update, delete on all tables in schema rst_app to admin;

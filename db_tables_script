@@ -1,0 +1,88 @@
+create table rst_app.restaurante ( rst_id  integer,
+name varchar(50) ,
+contact_number varchar(20),
+start_hour varchar(10),
+close_hour varchar(10),
+isWorking boolean,
+constraint restaurant_pk primary key ( rst_id)
+ );
+
+insert into rst_app.restaurante values( 12345 , 'Monmarter', '099123456' , '10:00' , '24:00', true  );
+
+create table rst_app.staff ( emp_id integer, emp_name varchar(50), emp_role varchar(50),
+   CONSTRAINT staff_pk PRIMARY KEY (emp_id));
+
+insert into rst_app.staff values( 1 , 'Viktorya Margaryan' , 'ADMIN' ) ;
+insert into rst_app.staff values( 2 , 'Anna Hakobyan' , 'WAITER' ) ;
+insert into rst_app.staff values( 3 , 'Poxos Poxosyan' ,'WAITER' ) ;
+insert into rst_app.staff values( 4 , 'Ani Petrosyan' ,'WAITER' ) ;
+insert into rst_app.staff values( 5 , 'Oleg Zapasnoy' ,'WAITER' ) ;
+insert into rst_app.staff values( 6 , 'Gor Ohanyan' , 'BARMEN' ) ;
+insert into rst_app.staff values( 7 , 'Gordon Ramzi' , 'COOK' ) ;
+
+create table rst_app.reservations ( reserve_id SERIAL primary key ,
+created_date date default CURRENT_DATE,
+table_id integer,
+reserver varchar(50),
+rsv_start date,
+rsv_end date,
+contact_number varchar(20),
+number_of_guests integer,
+zone varchar(20),
+additional_info varchar(250),
+sent_code integer,
+returned_code integer,
+status varchar(10));
+
+create table rst_app.Tables (table_id integer,
+persons_number integer ,
+zone varchar(20) ,
+current_availability boolean,
+constraint tables_pk primary key (table_id)) ;
+
+insert into rst_app.Tables values (1 , 4, 'VIP' );
+insert into rst_app.Tables values (2 , 10, 'VIP' );
+insert into rst_app.Tables values (3 , 2, 'VIP' );
+insert into rst_app.Tables values (4 , 4, 'SALON' );
+insert into rst_app.Tables values (5 , 10, 'SALON' );
+insert into rst_app.Tables values (6 , 2, 'SALON' );
+insert into rst_app.Tables values (7 , 4, 'BALCONY' );
+insert into rst_app.Tables values (8 , 10, 'BALCONY' );
+insert into rst_app.Tables values (9 , 2, 'BALCONY' );
+insert into rst_app.Tables values (10 , 4, 'BAR' );
+insert into rst_app.Tables values (11 , 10, 'BAR' );
+insert into rst_app.Tables values (12 , 2, 'BAR' );
+
+create table rst_app.WaiterToTables( created_date date ,
+waiter_id integer,
+table_id integer,
+constraint  WaiterToTables_pk primary key ( created_date, waiter_id, table_id ));
+
+insert into rst_app.WaiterToTables values( current_date,  2 , 1 ) ;
+insert into rst_app.WaiterToTables values( current_date,  2 , 2 ) ;
+insert into rst_app.WaiterToTables values( current_date,  2 , 3 ) ;
+
+insert into rst_app.WaiterToTables values( current_date,  3 , 4 ) ;
+insert into rst_app.WaiterToTables values( current_date,  3 , 5 ) ;
+insert into rst_app.WaiterToTables values( current_date,  3 , 6 ) ;
+
+insert into rst_app.WaiterToTables values( current_date,  4 , 7 ) ;
+insert into rst_app.WaiterToTables values( current_date,  4 , 8 ) ;
+insert into rst_app.WaiterToTables values( current_date,  4 , 9 ) ;
+
+insert into rst_app.WaiterToTables values( current_date,  6 , 10 ) ;
+insert into rst_app.WaiterToTables values( current_date,  6 , 11 ) ;
+insert into rst_app.WaiterToTables values( current_date,  6 , 12 ) ;
+
+create table rst_app.WaiterTips ( order_id serial primary key,
+created_date date default current_date,
+waiter_id integer,
+tips integer
+);
+
+insert into rst_app.WaiterTips(created_date, waiter_id, tips) values (current_date, 4 , 500);
+insert into rst_app.WaiterTips(created_date, waiter_id, tips) values (current_date, 4 , 200);
+insert into rst_app.WaiterTips(created_date, waiter_id, tips) values (current_date, 4 , 1000);
+
+insert into rst_app.WaiterTips(created_date, waiter_id, tips) values (current_date, 3 , 400);
+insert into rst_app.WaiterTips(created_date, waiter_id, tips) values (current_date, 3 , 2000);
